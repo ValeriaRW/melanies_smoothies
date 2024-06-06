@@ -29,19 +29,17 @@ if ingredients_list:
         ingredients_string += fruit_chosen +' '
         
     #st.write(ingredients_string)
+#new section to display fruityvice nutrition information
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response.json())
     
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
             values ('""" + ingredients_string + """','""" + name_on_order + """')"""
 
     #st.write(my_insert_stmt)
-
-#new section to display fruityvice nutrition information
-import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response.json())
-
-    
+   
     time_to_insert=st.button('submit order')
     if time_to_insert:
         session.sql(my_insert_stmt).collect()

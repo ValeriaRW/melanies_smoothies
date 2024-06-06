@@ -21,8 +21,8 @@ st.stop()
 
 #Convert the snowpark dataframe to a pandas dataframe so we can use the LOC function
 pd_df=my_dataframe.to_pandas()
-st.dataframe(pd_df)
-st.stop()
+#st.dataframe(pd_df)
+#st.stop()
 
 ingredients_list = st.multiselect(
   'Choose up to 5 ingredients:' 
@@ -41,7 +41,7 @@ if ingredients_list:
         st.subheader(fruit_chosen+' '+'Nutrition Information')
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon"+fruit_chosen)
         fv_df = st.dataframe(fruityvice_response.json(), use_container_width=True)
-    #st.write(ingredients_string)   
+        st.write(ingredients_string)   
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
             values ('""" + ingredients_string + """','""" + name_on_order + """')"""

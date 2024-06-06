@@ -36,17 +36,16 @@ if ingredients_list:
 
     #st.write(my_insert_stmt)
 
+#new section to display fruityvice nutrition information
+import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+st.text(fruityvice_response.json())
+
     
     time_to_insert=st.button('submit order')
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
         
         st.success('Your Smoothie is ordered, '+ name_on_order +'!', icon="✅")
-
-#new section to display fruityvice nutrition information
-import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response.json())
-
 
         st.stop()
